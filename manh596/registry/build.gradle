@@ -1,0 +1,9 @@
+dependencies {
+    compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
+    compile('org.springframework.cloud:spring-cloud-starter-config')
+}
+
+springBoot {
+    mainClass = 'com.manh596.registry.RegistryApplication'
+    executable = true
+}

@@ -1,0 +1,13 @@
+dependencies {
+    //compile('org.springframework.cloud:spring-cloud-starter-eureka')
+    //compile('org.springframework.cloud:spring-cloud-starter-config')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
+    compile('org.springframework.data:spring-data-mongodb')
+    //compile group: 'org.thymeleaf', name: 'thymeleaf', version: '3.0.9.RELEASE'
+}
+
+springBoot {
+    mainClass = 'ResumeApplication'
+    executable = true
+}
