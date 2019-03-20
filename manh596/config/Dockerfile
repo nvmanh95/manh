@@ -1,0 +1,10 @@
+FROM java:8-jre
+MAINTAINER Maksym Lukianenko <maksym_lukianenko@epam.com>
+
+VOLUME /home/atg/workspace/atg_microservices/build/libs/:/home/libs
+
+CMD ["java", "-Xmx200m", "-jar", "/home/libs/config-0.1.0.jar"]
+
+HEALTHCHECK --interval=10s --timeout=3s CMD curl -f http://localhost:3000/health || exit 1
+
+EXPOSE 3000

@@ -1,0 +1,29 @@
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+
+server:
+  port: 3005
+
+paypal:
+  clientId: AZD9lmDcq4-doygGKJeFMXWAsTn9hx9Oc7c6wqLxcSZKWyCKOLgWzjTF2zLnKl0mJ1_2RSLgwgE4PmRs
+  secret: EHR0XtgpV_xCDNoy5SHMuDaw1AY3fkiKR11UO-18NZ9HC6NRMOxFOh8za_PXzQIqXc1_QX4tU-g2VjBh
+  mode: sandbox
+  intent: sale
+  paymentMethod: paypal
+
+security:
+  key: ieat
+  location: keystore.ks
+
+bff:
+  sensitiveHeaders:
+    - X-Total-Count
+
+---
+
+spring:
+  profiles: docker
+
+
+

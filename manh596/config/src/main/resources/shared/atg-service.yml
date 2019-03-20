@@ -1,0 +1,16 @@
+sidecar:
+  hostname: localhost
+  port: 8080
+  health-uri: http://${sidecar.hostname}:${sidecar.port}/public/v1/health
+  home-page-uri: http://${sidecar.hostname}:${sidecar.port}/
+
+server:
+  port: 3003
+
+---
+
+spring:
+  profiles: prod
+sidecar:
+  hostname: epuakhaw1360ieat.kyiv.epam.com
+

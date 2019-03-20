@@ -1,0 +1,36 @@
+server:
+  port: 3007
+
+mongodb:
+  primary:
+    host: localhost
+    port: 27017
+    database: productCatalogA
+    username: myUserAdmin
+    password: mongoadmin
+    authentication-database: admin
+  secondary:
+    host: localhost
+    port: 27017
+    database: productCatalogB
+    username: myUserAdmin
+    password: mongoadmin
+    authentication-database: admin
+---
+spring:
+  profiles: docker
+mongodb:
+  primary:
+    host: epuakhaw1360ieat.kyiv.epam.com
+    port: 27017
+    database: productCatalogA
+    username: myUserAdmin
+    password: mongoadmin
+    authentication-database: admin
+  secondary:
+    host: epuakhaw1360ieat.kyiv.epam.com
+    port: 27017
+    database: productCatalogB
+    username: myUserAdmin
+    password: mongoadmin
+    authentication-database: admin
