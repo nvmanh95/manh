@@ -2,12 +2,9 @@ rootProject.name = 'manh596'
 
 include 'resume'
 include 'bff'
-include 'bff'
-include 'resume'
-include 'bff'
-include 'registry'
 include 'registry'
 include 'config'
 include 'contact'
 include 'ui'
+include 'common'
 
