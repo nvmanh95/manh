@@ -7,4 +7,5 @@ include 'config'
 include 'contact'
 include 'ui'
 include 'common'
+include 'domain'
 

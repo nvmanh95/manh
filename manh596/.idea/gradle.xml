@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/config" />
             <option value="$PROJECT_DIR$/contact" />
+            <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/registry" />
             <option value="$PROJECT_DIR$/resume" />
             <option value="$PROJECT_DIR$/ui" />
