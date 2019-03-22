@@ -3,18 +3,17 @@ package com.manh596.contact.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "contact")
-public class Contact {
-    @Id
+@Document(collection = "message")
+public class Message {
     private String id;
-    private String contactName;
-    private String contactMail;
-    private String contactNumber;
-    private String address;
+    private String emailId;
+    private String userId;
+    private String message;
+    private String date;
+    private Boolean isEdited;
 }

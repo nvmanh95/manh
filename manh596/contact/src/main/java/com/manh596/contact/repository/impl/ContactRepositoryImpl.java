@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.io.Serializable;
 import java.util.List;
 
-public class ContactRepositoryImpl<D, K extends Serializable>  implements ContactRepository<D, K> {
+public class ContactRepositoryImpl<D, K extends Serializable> implements ContactRepository<D, K> {
     private SimpleMongoRepository<D, K> primaryRepository;
 
     private SimpleMongoRepository<D, K> secondaryRepository;
@@ -33,7 +33,7 @@ public class ContactRepositoryImpl<D, K extends Serializable>  implements Contac
 
     @Override
     public List<D> getAll() {
-        return readWriteLocker.readLock(()-> actualSource.findAll());
+        return readWriteLocker.readLock(() -> actualSource.findAll());
     }
 
     @Override

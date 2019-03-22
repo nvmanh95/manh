@@ -7,14 +7,17 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "contact")
-public class Contact {
+@AllArgsConstructor
+@Document( collection = "email" )
+public class Email {
     @Id
     private String id;
-    private String contactName;
-    private String contactMail;
+    private String email;
+    private String userName;
+    private String password;
+    private String from;
     private String contactNumber;
-    private String address;
+    private String contactSubject;
+    private Message contactMessage;
 }

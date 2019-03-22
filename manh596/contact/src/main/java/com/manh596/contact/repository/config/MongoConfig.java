@@ -1,6 +1,11 @@
 package com.manh596.contact.repository.config;
 
 
+import com.manh596.contact.model.Contact;
+import com.manh596.contact.model.Email;
+import com.manh596.contact.model.Message;
+import com.manh596.contact.repository.ContactRepository;
+import com.manh596.contact.repository.impl.ContactRepositoryImpl;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
@@ -13,7 +18,11 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
+import org.springframework.data.mongodb.core.mapping.MongoPersistentEntity;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.data.mongodb.repository.query.MongoEntityInformation;
+import org.springframework.data.mongodb.repository.support.MappingMongoEntityInformation;
+import org.springframework.data.mongodb.repository.support.SimpleMongoRepository;
 
 import java.util.Collections;
 import java.util.List;
@@ -42,6 +51,71 @@ public class MongoConfig {
         return new MongoTemplate(secondaryFactory(this.mongoProperties.getSecondary()));
     }
 
+    @Bean("emailPrimary")
+    public SimpleMongoRepository<Email, String> getPrimaryEmailRepository() {
+        MongoTemplate mongoTemplate = primaryMongoTemplate();
+        MongoEntityInformation<Email, String> info = new MappingMongoEntityInformation<>(
+                (MongoPersistentEntity<Email>) mongoTemplate.getConverter().getMappingContext().getPersistentEntity(Email.class));
+        return new SimpleMongoRepository<>(info, primaryMongoTemplate());
+    }
+
+    @Bean("contactSecondary")
+    public SimpleMongoRepository<Email, String> getSecondaryEmailRepository() {
+        MongoTemplate mongoTemplate = secondaryMongoTemplate();
+        MongoEntityInformation<Email, String> info = new MappingMongoEntityInformation<>(
+                (MongoPersistentEntity<Email>) mongoTemplate.getConverter().getMappingContext().getPersistentEntity(Email.class)
+        );
+        return new SimpleMongoRepository<>(info, secondaryMongoTemplate());
+    }
+
+    @Bean("emailRepository")
+    public ContactRepository<Email, String> getEmailRepository() {
+        return new ContactRepositoryImpl<>(getPrimaryEmailRepository(), getSecondaryEmailRepository());
+    }
+
+    @Bean("contactPrimary")
+    public SimpleMongoRepository<Contact, String> getPrimaryContactRepository() {
+        MongoTemplate mongoTemplate = primaryMongoTemplate();
+        MongoEntityInformation<Contact, String> info = new MappingMongoEntityInformation<>(
+                (MongoPersistentEntity<Contact>) mongoTemplate.getConverter().getMappingContext().getPersistentEntity(Contact.class));
+        return new SimpleMongoRepository<>(info, primaryMongoTemplate());
+    }
+
+    @Bean("contactSecondary")
+    public SimpleMongoRepository<Contact, String> getSecondaryContactRepository() {
+        MongoTemplate mongoTemplate = secondaryMongoTemplate();
+        MongoEntityInformation<Contact, String> info = new MappingMongoEntityInformation<>(
+                (MongoPersistentEntity<Contact>) mongoTemplate.getConverter().getMappingContext().getPersistentEntity(Contact.class)
+        );
+        return new SimpleMongoRepository<>(info, secondaryMongoTemplate());
+    }
+
+    @Bean("contactRepository")
+    public ContactRepository<Contact, String> getContactRepository() {
+        return new ContactRepositoryImpl<>(getPrimaryContactRepository(), getSecondaryContactRepository());
+    }
+
+    @Bean("messagePrimary")
+    public SimpleMongoRepository<Message, String> getPrimaryMessageRepository() {
+        MongoTemplate mongoTemplate = primaryMongoTemplate();
+        MongoEntityInformation<Message, String> info = new MappingMongoEntityInformation<>(
+                (MongoPersistentEntity<Message>) mongoTemplate.getConverter().getMappingContext().getPersistentEntity(Message.class));
+        return new SimpleMongoRepository<>(info, primaryMongoTemplate());
+    }
+
+    @Bean("messageSecondary")
+    public SimpleMongoRepository<Message, String> getSecondaryMessageRepository() {
+        MongoTemplate mongoTemplate = secondaryMongoTemplate();
+        MongoEntityInformation<Message, String> info = new MappingMongoEntityInformation<>(
+                (MongoPersistentEntity<Message>) mongoTemplate.getConverter().getMappingContext().getPersistentEntity(Message.class)
+        );
+        return new SimpleMongoRepository<>(info, secondaryMongoTemplate());
+    }
+
+    @Bean("messageRepository")
+    public ContactRepository<Message, String> getMessageRepository() {
+        return new ContactRepositoryImpl<>(getPrimaryMessageRepository(), getSecondaryMessageRepository());
+    }
 
     @Bean
     @Primary
