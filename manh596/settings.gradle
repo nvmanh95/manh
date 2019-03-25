@@ -8,4 +8,4 @@ include 'contact'
 include 'ui'
 include 'common'
 include 'domain'
-
+include 'user'

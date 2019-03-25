@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/registry" />
             <option value="$PROJECT_DIR$/resume" />
             <option value="$PROJECT_DIR$/ui" />
+            <option value="$PROJECT_DIR$/user" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

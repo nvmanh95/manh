@@ -5,9 +5,15 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
     compile('org.springframework.data:spring-data-mongodb')
     //compile group: 'org.thymeleaf', name: 'thymeleaf', version: '3.0.9.RELEASE'
+    
+    compile project (':common')
 }
 
-springBoot {
-    mainClass = 'ResumeApplication'
-    executable = true
+bootJar {
+    mainClassName = 'com.manh596.resume.ResumeApplication'
+    launchScript ()
+}
+
+jar {
+    enabled = true
 }

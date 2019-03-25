@@ -11,7 +11,7 @@ dependencies {
     runtime('org.springframework.boot:spring-boot-devtools')
 }
 
-springBoot {
-    mainClass = 'com.epam.ieat.bff.BFFApplication'
-    executable = true
+bootJar {
+    mainClassName  = 'com.epam.ieat.bff.BFFApplication'
+    launchScript ()
 }

@@ -1,13 +1,13 @@
 package com.manh596.contact.repository.impl;
 
+import com.manh596.common.repository.mongo.locker.ReadWriteLocker;
 import com.manh596.contact.repository.ContactRepository;
-import com.manh596.contact.repository.ReadWriteLocker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.support.SimpleMongoRepository;
-import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 public class ContactRepositoryImpl<D, K extends Serializable> implements ContactRepository<D, K> {
     private SimpleMongoRepository<D, K> primaryRepository;
@@ -27,8 +27,8 @@ public class ContactRepositoryImpl<D, K extends Serializable> implements Contact
     }
 
     @Override
-    public D getById(K id) {
-        return readWriteLocker.readLock(() -> actualSource.findOne(id));
+    public Optional<D> getById(K id) {
+        return readWriteLocker.readLock(() -> actualSource.findById(id));
     }
 
     @Override
@@ -50,9 +50,9 @@ public class ContactRepositoryImpl<D, K extends Serializable> implements Contact
     }
 
     @Override
-    public void delete(K idEntityToBeDeleted) {
+    public void delete(D toBeDeleted) {
         readWriteLocker.writeBlock(() -> {
-            actualSource.delete(idEntityToBeDeleted);
+            actualSource.delete(toBeDeleted);
             return true;
         });
     }
@@ -68,7 +68,7 @@ public class ContactRepositoryImpl<D, K extends Serializable> implements Contact
     @Override
     public void saveAll(List<D> contacts) {
         readWriteLocker.writeBlock(() -> {
-            actualSource.save(contacts);
+            actualSource.insert(contacts);
             return true;
         });
     }

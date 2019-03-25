@@ -2,9 +2,10 @@ package com.manh596.resume.repository;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 public interface ResumeRepository<D, K extends Serializable> {
-    D getById(K id);
+    Optional<D> getById(K id);
 
     List<D> getAll();
 
@@ -12,7 +13,7 @@ public interface ResumeRepository<D, K extends Serializable> {
 
     Boolean update(K idEntityToBeUpdated, D entity);
 
-    void delete(K idEntityToBeDeleted);
+    void delete(D toBeDeleted);
 
     void deleteAll();
 

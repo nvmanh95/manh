@@ -1,5 +1,6 @@
 package com.manh596.resume.repository.config;
 
+import com.manh596.common.repository.mongo.config.MongoConnectionHelper;
 import com.manh596.resume.model.Education;
 import com.manh596.resume.model.Experience;
 import com.manh596.resume.model.Skill;
@@ -33,6 +34,7 @@ import java.util.List;
 public class MongoConfig {
 
     private final MultipleMongoProperties mongoProperties;
+    private MongoConnectionHelper connectionHelper;
 
     @Bean(name = "mongoTemplate")
     public MongoTemplate mongoTemplate() {
@@ -116,20 +118,11 @@ public class MongoConfig {
     @Bean
     @Primary
     public MongoDbFactory primaryFactory(final MongoProperties mongo) {
-        return getMongoDbFactory(mongo);
+        return connectionHelper.getMongoDbFactory(mongo);
     }
 
     @Bean
     public MongoDbFactory secondaryFactory(final MongoProperties mongo) {
-        return getMongoDbFactory(mongo);
-    }
-
-    private SimpleMongoDbFactory getMongoDbFactory(MongoProperties mongo) {
-        MongoCredential mongoCredential = MongoCredential.createCredential(mongo.getUsername(), mongo.getAuthenticationDatabase(), mongo.getPassword());
-        List<MongoCredential> mongoCredentialList = Collections.singletonList(mongoCredential);
-        ServerAddress serverAddress = new ServerAddress(mongo.getHost(), mongo.getPort());
-        MongoClient mongoClient = new MongoClient(serverAddress, mongoCredentialList);
-        return new SimpleMongoDbFactory(mongoClient,
-                mongo.getDatabase());
+        return connectionHelper.getMongoDbFactory(mongo);
     }
 }

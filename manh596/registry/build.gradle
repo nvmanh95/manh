@@ -3,7 +3,7 @@ dependencies {
     compile('org.springframework.cloud:spring-cloud-starter-config')
 }
 
-springBoot {
-    mainClass = 'com.manh596.registry.RegistryApplication'
-    executable = true
+bootJar {
+    mainClassName = 'com.manh596.registry.RegistryApplication'
+    launchScript ()
 }

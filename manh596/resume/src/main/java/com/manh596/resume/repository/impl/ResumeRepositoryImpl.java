@@ -1,12 +1,13 @@
 package com.manh596.resume.repository.impl;
 
-import com.manh596.resume.repository.ReadWriteLocker;
+import com.manh596.common.repository.mongo.locker.ReadWriteLocker;
 import com.manh596.resume.repository.ResumeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.support.SimpleMongoRepository;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 public class ResumeRepositoryImpl<D, K extends Serializable> implements ResumeRepository<D, K> {
 
@@ -26,8 +27,8 @@ public class ResumeRepositoryImpl<D, K extends Serializable> implements ResumeRe
     }
 
     @Override
-    public D getById(K id) {
-        return readWriteLocker.readLock(() -> actualSource.findOne(id));
+    public Optional<D> getById(K id) {
+        return readWriteLocker.readLock(() -> actualSource.findById(id));
     }
 
     @Override
@@ -46,9 +47,9 @@ public class ResumeRepositoryImpl<D, K extends Serializable> implements ResumeRe
     }
 
     @Override
-    public void delete(K idEntityToBeDeleted) {
+    public void delete(D toBeDeleted) {
         readWriteLocker.writeBlock(() -> {
-            actualSource.delete(idEntityToBeDeleted);
+            actualSource.delete(toBeDeleted);
             return true;
         });
     }
@@ -64,7 +65,7 @@ public class ResumeRepositoryImpl<D, K extends Serializable> implements ResumeRe
     @Override
     public void saveAll(List<D> educations) {
         readWriteLocker.writeBlock(() -> {
-            actualSource.save(educations);
+            actualSource.insert(educations);
             return true;
         });
     }
