@@ -3,13 +3,14 @@ package com.manh596.resume.service;
 import com.manh596.resume.model.Experience;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ExperienceService {
     List<Experience> getExperiences();
 
-    Experience getById(String id);
+    Optional<Experience> getById(String id);
 
-    void delete(String idToBeDeleted);
+    void delete(Experience idToBeDeleted);
 
     void deleteAll();
 

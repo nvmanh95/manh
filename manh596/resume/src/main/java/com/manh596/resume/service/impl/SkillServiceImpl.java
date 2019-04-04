@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SkillServiceImpl implements SkillService {
@@ -22,12 +23,12 @@ public class SkillServiceImpl implements SkillService {
     }
 
     @Override
-    public Skill getById(String id) {
+    public Optional<Skill> getById(String id) {
         return repository.getById(id);
     }
 
     @Override
-    public void delete(String idToBeDeleted) {
+    public void delete(Skill idToBeDeleted) {
         repository.delete(idToBeDeleted);
     }
 

@@ -1,6 +1,9 @@
 package com.manh596.user.repository.config;
 
 import com.manh596.common.repository.mongo.config.MongoConnectionHelper;
+import com.manh596.user.model.User;
+import com.manh596.user.repository.UserRepository;
+import com.manh596.user.repository.impl.UserRepositoryImpl;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
@@ -13,7 +16,11 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
+import org.springframework.data.mongodb.core.mapping.MongoPersistentEntity;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.data.mongodb.repository.query.MongoEntityInformation;
+import org.springframework.data.mongodb.repository.support.MappingMongoEntityInformation;
+import org.springframework.data.mongodb.repository.support.SimpleMongoRepository;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,7 +28,7 @@ import java.util.List;
 @Configuration
 @RequiredArgsConstructor
 @EnableConfigurationProperties(MultipleMongoProperties.class)
-@EnableMongoRepositories(basePackages = "com.manh596.resume.repository")
+@EnableMongoRepositories(basePackages = "com.manh596.user.repository")
 public class MongoConfig {
 
     private final MultipleMongoProperties mongoProperties;
@@ -43,6 +50,28 @@ public class MongoConfig {
         return new MongoTemplate(secondaryFactory(this.mongoProperties.getSecondary()));
     }
 
+    @Bean("primaryUserRepository")
+    public SimpleMongoRepository<User, String> getPrimaryUserRepository() {
+        MongoTemplate mongoTemplate = primaryMongoTemplate();
+        MongoEntityInformation<User, String> information = new MappingMongoEntityInformation<>(
+                (MongoPersistentEntity<User>) mongoTemplate.getConverter().getMappingContext().getPersistentEntity(User.class)
+        );
+        return new SimpleMongoRepository<>(information, primaryMongoTemplate());
+    }
+
+    @Bean("secondaryUserRepository")
+    public SimpleMongoRepository<User, String> getSecondaryUserRepository() {
+        MongoTemplate mongoTemplate = secondaryMongoTemplate();
+        MongoEntityInformation<User, String> information = new MappingMongoEntityInformation<>(
+                (MongoPersistentEntity<User>) mongoTemplate.getConverter().getMappingContext().getPersistentEntity(User.class)
+        );
+        return new SimpleMongoRepository<>(information, secondaryMongoTemplate());
+    }
+
+    @Bean("userRepository")
+    public UserRepository<User, String> getUserRepository() {
+        return new UserRepositoryImpl<>(getPrimaryUserRepository(), getSecondaryUserRepository());
+    }
 
     @Bean
     @Primary

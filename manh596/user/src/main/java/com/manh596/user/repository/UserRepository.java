@@ -1,21 +1,24 @@
 package com.manh596.user.repository;
 
+import org.springframework.data.mongodb.repository.MongoRepository;
+
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository<D, K extends Serializable> {
 
-    D getUserById(K userId);
+    Optional<D> getUserById(K userId);
 
     List<D> getAllUsers();
 
-    D getUserByEmail(K userEmail);
+    Optional<D> getUserByEmail(D userWithEmail);
 
-    D getUserByUserName(K userName);
+    Optional<D> getUserByUserName(D userWithName);
 
     void addNewUser(D newUser);
 
     Boolean removeUser(D toBeRemoved);
 
-    Boolean update(D toBeUpdated);
+    Boolean update(K currentId, D toBeUpdated);
 }

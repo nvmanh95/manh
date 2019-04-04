@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EducationServiceImpl implements EducationService {
@@ -22,12 +23,12 @@ public class EducationServiceImpl implements EducationService {
     }
 
     @Override
-    public Education getById(String id) {
+    public Optional<Education> getById(String id) {
         return repository.getById(id);
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Education id) {
         repository.delete(id);
     }
 

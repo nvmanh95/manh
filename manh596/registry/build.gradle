@@ -2,8 +2,3 @@ dependencies {
     compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
     compile('org.springframework.cloud:spring-cloud-starter-config')
 }
-
-bootJar {
-    mainClassName = 'com.manh596.registry.RegistryApplication'
-    launchScript ()
-}

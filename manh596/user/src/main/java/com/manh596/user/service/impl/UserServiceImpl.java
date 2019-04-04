@@ -34,8 +34,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(User toBeUpdated) {
-        repository.update(toBeUpdated);
+    public void update(User updatedUser) {
+        Optional<User> currentUser = repository.getUserById(updatedUser.getId());
+        if (currentUser.isPresent()) {
+           repository.update(updatedUser.getId(), updatedUser);
+        }
     }
 
     @Override
@@ -45,16 +48,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> getUserById(String userId) {
-        return Optional.of(repository.getUserById(userId));
+        return repository.getUserById(userId);
     }
 
     @Override
     public Optional<User> getUserByUserName(String userName) {
-        return Optional.of(repository.getUserByUserName(userName));
+        User userWithEmail = new User();
+        userWithEmail.setUserName(userName);
+
+        return repository.getUserByUserName(userWithEmail);
     }
 
     @Override
     public Optional<User> getUserByEmail(String email) {
-        return Optional.of(repository.getUserByEmail(email));
+        User userWithName = new User();
+        userWithName.setUserName(email);
+
+        return repository.getUserByEmail(userWithName);
     }
 }

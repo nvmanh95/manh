@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ExperienceServiceImpl implements ExperienceService {
@@ -22,12 +23,12 @@ public class ExperienceServiceImpl implements ExperienceService {
     }
 
     @Override
-    public Experience getById(String id) {
+    public Optional<Experience> getById(String id) {
         return repository.getById(id);
     }
 
     @Override
-    public void delete(String idToBeDeleted) {
+    public void delete(Experience idToBeDeleted) {
         repository.delete(idToBeDeleted);
     }
 

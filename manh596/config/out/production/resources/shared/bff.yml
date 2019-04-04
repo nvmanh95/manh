@@ -1,0 +1,37 @@
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
+server:
+  port: 3002
+  scheme: http
+  hostname: localhost
+
+security:
+  key: ieat
+  location: keystore.ks
+
+
+# ATG properties
+atg:
+  date:
+    format: yyyy-MM-dd
+
+bff:
+  pagination:
+      defaultPageNumber: 1
+      defaultPageSize: 8
+  sorting:
+    availableOptions:
+      name:
+        property: name
+        type: asc
+      cheap:
+        property: price
+        type: asc
+      expensive:
+        property: price
+        type: desc
+    defaultSortOption: name
+  sensitiveHeaders:
+    - X-Total-Count
