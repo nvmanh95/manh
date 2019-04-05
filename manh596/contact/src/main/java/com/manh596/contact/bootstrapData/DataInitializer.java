@@ -32,5 +32,6 @@ public class DataInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         initializeContactData();
         initializeEmailData();
+        System.out.println("sdfss");
     }
 }

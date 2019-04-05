@@ -13,3 +13,7 @@ mongodb:
     username: myUserAdmin
     password: mongoadmin
     authentication-database: admin
+
+app:
+  jwtSecret: JWTSuperSecretKey
+  jwtExpirationInMs: 604800000

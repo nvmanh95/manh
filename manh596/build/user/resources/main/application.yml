@@ -1,0 +1,15 @@
+mongodb:
+  primary:
+    host: localhost
+    port: 27017
+    database: primaryUser
+    username: myUserAdmin
+    password: mongoadmin
+    authentication-database: admin
+  secondary:
+    host: localhost
+    port: 27017
+    database: secondaryUser
+    username: myUserAdmin
+    password: mongoadmin
+    authentication-database: admin

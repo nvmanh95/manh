@@ -13,6 +13,13 @@ import java.util.Set;
 @NoArgsConstructor
 @Document(collection = "user")
 public class User {
+
+    public User(String id, String userName, String email, String password) {
+        this.id = id;
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+    }
     @Id
     private String id;
     private String userName;

@@ -1,0 +1,36 @@
+server:
+  port: 3007
+
+mongodb:
+  primary:
+    host: localhost
+    port: 27017
+    database: contact1
+    username: myUserAdmin
+    password: mongoadmin
+    authentication-database: admin
+  secondary:
+    host: localhost
+    port: 27017
+    database: contact2
+    username: myUserAdmin
+    password: mongoadmin
+    authentication-database: admin
+---
+spring:
+  profiles: docker
+mongodb:
+  primary:
+    host: localhost
+    port: 27017
+    database: contact1
+    username: myUserAdmin
+    password: mongoadmin
+    authentication-database: admin
+  secondary:
+    host: localhost
+    port: 27017
+    database: contact2
+    username: myUserAdmin
+    password: mongoadmin
+    authentication-database: admin

@@ -30,7 +30,7 @@ import java.util.List;
 @Configuration
 @RequiredArgsConstructor
 @EnableConfigurationProperties(MultipleMongoProperties.class)
-@EnableMongoRepositories(basePackages = "com.manh596.resume.repository")
+@EnableMongoRepositories(basePackages = "com.manh596.contact.repository")
 public class MongoConfig {
 
     private final MultipleMongoProperties mongoProperties;

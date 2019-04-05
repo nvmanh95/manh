@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -24,7 +25,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void create(User newUser) {
-        newUser.setId(USER_ID_PREFIX + numberService.generateId());
+        System.out.println("dssdfs");
+        if (Objects.isNull(newUser.getId())) {
+            newUser.setId(USER_ID_PREFIX + numberService.generateId());
+        }
         repository.addNewUser(newUser);
     }
 
@@ -37,7 +41,7 @@ public class UserServiceImpl implements UserService {
     public void update(User updatedUser) {
         Optional<User> currentUser = repository.getUserById(updatedUser.getId());
         if (currentUser.isPresent()) {
-           repository.update(updatedUser.getId(), updatedUser);
+            repository.update(updatedUser.getId(), updatedUser);
         }
     }
 

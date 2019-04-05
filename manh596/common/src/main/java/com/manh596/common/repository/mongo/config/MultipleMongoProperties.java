@@ -1,13 +1,9 @@
 package com.manh596.common.repository.mongo.config;
 
-import lombok.Data;
 import org.springframework.boot.autoconfigure.mongo.MongoProperties;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@Data
-@ConfigurationProperties(prefix = "mongodb")
-public class MultipleMongoProperties {
+public interface MultipleMongoProperties {
+    MongoProperties getPrimary();
 
-    private MongoProperties primary = new MongoProperties();
-    private MongoProperties secondary = new MongoProperties();
+    MongoProperties getSecondary();
 }

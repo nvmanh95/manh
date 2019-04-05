@@ -6,7 +6,9 @@ import com.manh596.contact.repository.ContactRepository;
 import com.manh596.contact.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
+@Service
 public class EmailServiceImpl implements EmailService {
 
     @Autowired

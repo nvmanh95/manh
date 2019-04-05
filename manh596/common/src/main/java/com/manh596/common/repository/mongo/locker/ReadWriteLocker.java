@@ -1,9 +1,12 @@
 package com.manh596.common.repository.mongo.locker;
 
+import org.springframework.stereotype.Component;
+
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+@Component
 public class ReadWriteLocker {
     private ReadWriteLock lock = new ReentrantReadWriteLock();
     private Lock writeLock = lock.writeLock();
